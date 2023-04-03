@@ -45,7 +45,7 @@ input {
   outline: 0;
 }
 
-.btn-btn {
+.btn-text {
   padding: 5px;
   border: 1px solid #23252322;
   border-radius: 5px;
@@ -53,7 +53,7 @@ input {
   background-color: white;
 }
 
-.btn-btn:hover {
+.btn-text:hover {
   background-color: rgb(168, 168, 168);
   transition: 0.5s;
   cursor: pointer;

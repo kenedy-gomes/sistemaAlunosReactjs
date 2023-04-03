@@ -1,31 +1,38 @@
 import "./signin.css";
-import { useState, useEffect } from "react";
+import { useState} from "react";
+import axios from 'axios';
 
-const baseURL = "http://localhost:8080/alunos";
+const baseURL = "http://localhost:8080/alunos/name";
 
-function SignIn({ items }) {
+function SignIn() {
   const [busca, setBusca] = useState("");
   const [alunos, setAlunos] = useState([]);
-
+  const [error, SetError] = useState(null);
+  const [loading, SetLoading] = useState('');
+ 
   const handleChange = (event) => {
     setBusca(event.target.value);
   };
   const handleClick = () => {};
 
   const getAlunos = async () => {
-    const response = await fetch(baseURL, {
-      method: "get",
-      headers: new Headers({
-        "Content-Type": "	application/json",
-      }),
-    });
-    const alunos = await response.json();
-    setAlunos(alunos);
+      axios.get(baseURL,{
+        params: {
+          name: busca
+        }
+      }).then(response => {
+        SetLoading(true)
+        setAlunos(response.data)
+      }).catch(error => {
+        console.error("Error fetching data", error)
+        SetError(error)
+      })
+      .finally(() => {
+        SetLoading(false);
+      })
   };
-
-  useEffect(() => {
-    getAlunos();
-  }, []);
+  if(loading) return "Loading...";
+  if(error) return "Error!";
 
   return (
     <div className="container">
@@ -46,12 +53,14 @@ function SignIn({ items }) {
               className="input-text"
               type="text"
             />
-            <button onClick={handleClick}>Confirmar</button>
+            <button className="btn-text" onClick={() => getAlunos()}>Confirmar</button>
           </div>
           <div>
             Cursos:
             <input className="input-text" type="text" />
-            <button onClick={handleClick}>Confirmar</button>
+            
+            <button className="btn-text" onClick={handleClick}>Confirmar</button>
+         
           </div>
         </section>
         <hr />
@@ -59,14 +68,18 @@ function SignIn({ items }) {
           <div className="container-resultados">
             <div>
               <h1>Resultados Alunos</h1>
-              <ul>
+              <div>
+              <hr />
                 {alunos.map((alunos) => {
-                  const { id, name, email, cpf, name_mae, nome_pai } = alunos;
+                  const { id, name, cpf, email } = alunos;
                   return (
-                    <>
+                    <ul>
+                      <ul>
                       <li key={id}>
                         <div>{id}</div>
                       </li>
+                        
+                      </ul>
                       <li key={name}>
                         <div>{name}</div>
                       </li>
@@ -76,18 +89,13 @@ function SignIn({ items }) {
                       <li key={cpf}>
                         <div>{cpf}</div>
                       </li>
-                      <li key={name_mae}>
-                        <div>{name_mae}</div>
-                      </li>
-                      <li key={nome_pai}>
-                        <div>{nome_pai}</div>
-                      </li>
-                    </>
+                      <hr/>
+                    </ul>
                   );
                 })}
-              </ul>
+              </div>
             </div>
-            <div>
+            <div className="container-Cursos">
               <h1>Resultados Cursos</h1>
               <li type="text" />
             </div>
