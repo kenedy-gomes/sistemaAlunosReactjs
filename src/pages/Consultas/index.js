@@ -1,38 +1,66 @@
 import "./signin.css";
-import { useState} from "react";
+import { useState } from "react";
 import axios from 'axios';
 
 const baseURL = "http://localhost:8080/alunos/name";
+const baseURL2 = "http://localhost:8080/cursos/name";
 
 function SignIn() {
   const [busca, setBusca] = useState("");
   const [alunos, setAlunos] = useState([]);
+  
+  const [buscaCurs, setBuscaCurs] = useState("");
+  const [cursos, setCursos] = useState([]);
+
   const [error, SetError] = useState(null);
   const [loading, SetLoading] = useState('');
- 
+
   const handleChange = (event) => {
     setBusca(event.target.value);
   };
-  const handleClick = () => {};
+
+  const handleChangecurs = (event) => {
+    setBuscaCurs(event.target.vale);
+  };
 
   const getAlunos = async () => {
-      axios.get(baseURL,{
-        params: {
-          name: busca
-        }
-      }).then(response => {
-        SetLoading(true)
-        setAlunos(response.data)
-      }).catch(error => {
-        console.error("Error fetching data", error)
-        SetError(error)
-      })
+    axios.get(baseURL, {
+      params: {
+        name: busca
+      }
+    }).then(response => {
+      SetLoading(true)
+      setAlunos(response.data)
+    }).catch(error => {
+      console.error("Error fetching data", error)
+      SetError(error)
+    })
       .finally(() => {
         SetLoading(false);
       })
   };
-  if(loading) return "Loading...";
-  if(error) return "Error!";
+  if (loading) return "Loading...";
+  if (error) return "Error!";
+
+  
+
+  const getCursos = async () => {
+    axios.get(baseURL2, {
+      params: {
+        name: buscaCurs
+      }
+    }).then(response => {
+      SetLoading(true)
+      setCursos(response.data)
+    }).catch(error => {
+      console.error("Error fetching data", error)
+      SetError(error)
+    })
+      .finally(() => {
+        SetLoading(false);
+      })
+  };
+
 
   return (
     <div className="container">
@@ -57,28 +85,30 @@ function SignIn() {
           </div>
           <div>
             Cursos:
-            <input className="input-text" type="text" />
-            
-            <button className="btn-text" onClick={handleClick}>Confirmar</button>
-         
+            <input
+              onChange={handleChangecurs}
+              value={buscaCurs}
+              className="input-text" type="text" />
+
+            <button className="btn-text" onClick={()=> getCursos()}>Confirmar</button>
+
           </div>
         </section>
         <hr />
-        <section className="container-text">
+        <section method="get" className="container-text">
           <div className="container-resultados">
             <div>
               <h1>Resultados Alunos</h1>
               <div>
-              <hr />
+                <hr />
                 {alunos.map((alunos) => {
                   const { id, name, cpf, email } = alunos;
                   return (
                     <ul>
                       <ul>
-                      <li key={id}>
-                        <div>{id}</div>
-                      </li>
-                        
+                        <li key={id}>
+                          <div>{id}</div>
+                        </li>
                       </ul>
                       <li key={name}>
                         <div>{name}</div>
@@ -89,16 +119,32 @@ function SignIn() {
                       <li key={cpf}>
                         <div>{cpf}</div>
                       </li>
-                      <hr/>
+                      <hr />
                     </ul>
                   );
                 })}
               </div>
             </div>
-            <div className="container-Cursos">
+            <div>
               <h1>Resultados Cursos</h1>
-              <li type="text" />
             </div>
+            <hr/>
+            {cursos.map((cursos) => {
+                  const { id, name} = cursos;
+                  return (
+                    <ul>
+                      <ul>
+                        <li key={id}>
+                          <div>{id}</div>
+                        </li>
+                      </ul>
+                      <li key={name}>
+                        <div>{name}</div>
+                      </li>
+                      <hr />
+                    </ul>
+              );
+            })}
           </div>
         </section>
       </div>
