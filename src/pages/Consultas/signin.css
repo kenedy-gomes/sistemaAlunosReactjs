@@ -36,37 +36,7 @@ body {
 input {
   margin: 2px;
 }
-
-.input-text {
-  padding: 5px;
-  border-radius: 5px;
-  border: 1px solid #23252322;
-  box-shadow: 0 0 0 0;
-  outline: 0;
-}
-
-.btn-text {
-  padding: 5px;
-  border: 1px solid #23252322;
-  border-radius: 5px;
-  margin: 0px 0px 0px 10px;
-  background-color: white;
-}
-
-.btn-text:hover {
-  background-color: rgb(168, 168, 168);
-  transition: 0.5s;
-  cursor: pointer;
-}
-
-.input-textarea {
-  display: flex;
-  width: 500px;
-  height: 300px;
-  box-shadow: 0 0 0 0;
-  outline: 0;
-  border-radius: 5px;
-  font-size: 20px;
-  color: green;
-  margin: 0px 0px 10px 0px;
+ 
+.inputcursos{
+  margin: 10px !important;
 }

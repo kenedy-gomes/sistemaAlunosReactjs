@@ -1,4 +1,5 @@
 import "./signin.css";
+import 'semantic-ui-css/semantic.min.css'
 import { useState } from "react";
 import axios from 'axios';
 
@@ -8,7 +9,7 @@ const baseURL2 = "http://localhost:8080/cursos/name";
 function SignIn() {
   const [busca, setBusca] = useState("");
   const [alunos, setAlunos] = useState([]);
-  
+
   const [buscaCurs, setBuscaCurs] = useState("");
   const [cursos, setCursos] = useState([]);
 
@@ -20,7 +21,7 @@ function SignIn() {
   };
 
   const handleChangecurs = (event) => {
-    setBuscaCurs(event.target.vale);
+    setBuscaCurs(event.target.value);
   };
 
   const getAlunos = async () => {
@@ -41,9 +42,7 @@ function SignIn() {
   };
   if (loading) return "Loading...";
   if (error) return "Error!";
-
   
-
   const getCursos = async () => {
     axios.get(baseURL2, {
       params: {
@@ -73,76 +72,38 @@ function SignIn() {
         <section method="get" className="container-form">
           <div className="cont">
             Alunos:
-            <input
-              onChange={handleChange}
-              value={busca}
-              id="textinput"
-              name="textinput"
-              className="input-text"
-              type="text"
-            />
-            <button className="btn-text" onClick={() => getAlunos()}>Confirmar</button>
+            <div class="ui focus input"><input className="inputcursos" onChange={handleChange} value={busca} type="text" placeholder="Search..." /></div>
+            <button onClick={() => getAlunos()} class="ui button">Buscar</button>
           </div>
           <div>
             Cursos:
-            <input
-              onChange={handleChangecurs}
-              value={buscaCurs}
-              className="input-text" type="text" />
-
-            <button className="btn-text" onClick={()=> getCursos()}>Confirmar</button>
-
+            <div class="ui focus input"><input className="inputcursos" onChange={handleChangecurs} value={buscaCurs} type="text" placeholder="Search..." /></div>
+            <button className="ui button" onClick={() => getCursos()}>Buscar</button>
           </div>
         </section>
-        <hr />
+
         <section method="get" className="container-text">
           <div className="container-resultados">
             <div>
               <h1>Resultados Alunos</h1>
               <div>
-                <hr />
                 {alunos.map((alunos) => {
                   const { id, name, cpf, email } = alunos;
                   return (
-                    <ul>
-                      <ul>
-                        <li key={id}>
-                          <div>{id}</div>
-                        </li>
-                      </ul>
-                      <li key={name}>
-                        <div>{name}</div>
-                      </li>
-                      <li key={email}>
-                        <div>{email}</div>
-                      </li>
-                      <li key={cpf}>
-                        <div>{cpf}</div>
-                      </li>
-                      <hr />
-                    </ul>
+                    <div role="list" ><div key={name} role="listitem" class="item"><div key={id} class="header"><br /> ID: {id}</div>NAME: {name}</div><div key={cpf} role="listitem" class="item"><div key={email} class="header">EMAIL: {email}</div>CPF: {cpf}</div></div>
                   );
                 })}
               </div>
             </div>
+            <br />
             <div>
               <h1>Resultados Cursos</h1>
             </div>
-            <hr/>
+
             {cursos.map((cursos) => {
-                  const { id, name} = cursos;
-                  return (
-                    <ul>
-                      <ul>
-                        <li key={id}>
-                          <div>{id}</div>
-                        </li>
-                      </ul>
-                      <li key={name}>
-                        <div>{name}</div>
-                      </li>
-                      <hr />
-                    </ul>
+              const { id, name } = cursos;
+              return (
+                <div role="list" class="ui list"><div key={id} role="listitem" class="item"><div key={name} class="header">ID: {id}</div>NAME: {name}</div></div>
               );
             })}
           </div>
