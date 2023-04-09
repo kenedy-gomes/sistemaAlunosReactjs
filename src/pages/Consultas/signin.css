@@ -21,22 +21,40 @@ body {
   text-align: center;
 }
 
-.container-form {
-  padding: 20px;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.form {
+  width: 50%;
 }
 
 .container-resultados {
   padding: 20px;
 }
 
-.cont {
-  margin: 0px 0px 10px 0px;
+.inputcursos {
+  margin: 10px !important;
 }
 
-input {
-  margin: 2px;
-}
- 
-.inputcursos{
+.ui.button {
   margin: 10px !important;
+}
+
+.inputcursos {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #87a0e6;
+  box-shadow: 0 0 0 0;
+  outline: 0;
+}
+
+.button-link {
+  border: 1px solid;
+  width: 100px;
+  padding: 5px;
+  border-radius: 5px;
 }
