@@ -5,8 +5,6 @@ import axios from "axios";
 
 const baseURL = "http://localhost:8080/alunos/name";
 const baseURL2 = "http://localhost:8080/cursos/name";
-const baseURL3 = "http://localhost:8080/alunos";
-
 function SignIn() {
   const [busca, setBusca] = useState("");
   const [alunos, setAlunos] = useState([]);

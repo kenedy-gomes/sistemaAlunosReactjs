@@ -4,18 +4,17 @@ import "semantic-ui-css/semantic.min.css";
 import "../SignUp/signUp.css";
 import axios from "axios";
 
-const baseURL = "http://localhost:8080/alunos";
+const baseURL = "http://localhost:8080/alunos/cadastro";
 
 function SignUp() {
-  const postAlunos = async () => {
+  const handleSubmit1 = (data) => {
     axios
       .post(baseURL, {
-        name: "",
-        email: "",
-        cpf: "",
-        name_mae: "",
-        name_pai: "",
+        name: data.name,
+        email: data.email,
+        cpf: data.cpf,
       })
+
       .then(function (response) {
         console.log(response);
       })
@@ -23,7 +22,6 @@ function SignUp() {
         console.log(error);
       });
   };
-
   return (
     <>
       <nav className="nav-bar">
@@ -31,18 +29,15 @@ function SignUp() {
           <h1>Consultas e Cadastro de Alunos - Cursos</h1>
         </div>
       </nav>
-
       <section className="container-cadastro">
         <div className="container-form">
           <h1>Cadastro Alunos</h1>
-          <div className="form">
+          <div method="post" className="form">
             <Formik
               initialValues={{
                 name: "",
                 email: "",
                 cpf: "",
-                name_mae: "",
-                name_pai: "",
               }}
               validate={(values) => {
                 const errors = {};
@@ -55,12 +50,7 @@ function SignUp() {
                 }
                 return errors;
               }}
-              onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
-                  setSubmitting(false);
-                }, 400);
-              }}
+              onSubmit={handleSubmit1}
             >
               {({
                 values,
@@ -85,7 +75,6 @@ function SignUp() {
                         placeholder="Name..."
                       />
                     </div>
-
                     <div>
                       <input
                         className="inputcursos"
@@ -109,34 +98,10 @@ function SignUp() {
                         placeholder="CPF..."
                       />
                     </div>
-
-                    <div>
-                      <input
-                        className="inputcursos"
-                        type="name_mae"
-                        name="name_mae"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.name_mae}
-                        placeholder="Nome da Mae..."
-                      />
-                    </div>
-
-                    <div>
-                      <input
-                        className="inputcursos"
-                        type="name_pai"
-                        name="name_pai"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.name_pai}
-                        placeholder="Nome do Pai..."
-                      />
-                    </div>
                   </form>
                   <div className="btn-btn">
                     <button
-                      onClick={() => postAlunos()}
+                      onClick={handleSubmit}
                       className="ui button"
                       type="submit"
                       disabled={isSubmitting}
@@ -153,5 +118,4 @@ function SignUp() {
     </>
   );
 }
-
 export default SignUp;
