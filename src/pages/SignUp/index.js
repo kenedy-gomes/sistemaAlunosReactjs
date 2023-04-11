@@ -21,18 +21,22 @@ function SignUp() {
       .catch(function (error) {
         console.log(error);
       });
+    alert("Cadastro efetuado!")
+    window.location.href = "http://localhost:3000";
   };
   return (
-    <>
+    <div>
       <nav className="nav-bar">
         <div className="text">
           <h1>Consultas e Cadastro de Alunos - Cursos</h1>
         </div>
       </nav>
-      <section className="container-cadastro">
+      <div className="container ">
         <div className="container-form">
-          <h1>Cadastro Alunos</h1>
-          <div method="post" className="form">
+          <div className="h1-container">
+            <h1>Cadastro Alunos</h1>
+          </div>
+          <div method="post" >
             <Formik
               initialValues={{
                 name: "",
@@ -62,9 +66,12 @@ function SignUp() {
                 isSubmitting,
                 /* and other goodies */
               }) => (
-                <div>
+                <>
                   <form method="post" onSubmit={handleSubmit}>
-                    <div>
+
+
+   
+                    <div className="ui focus input">
                       <input
                         className="inputcursos"
                         type="name"
@@ -75,7 +82,9 @@ function SignUp() {
                         placeholder="Name..."
                       />
                     </div>
-                    <div>
+
+
+                    <div className="ui focus input">
                       <input
                         className="inputcursos"
                         type="email"
@@ -86,8 +95,10 @@ function SignUp() {
                         placeholder="Email..."
                       />
                     </div>
+
+
                     {errors.email && touched.email && errors.email}
-                    <div>
+                    <div className="ui focus input">
                       <input
                         className="inputcursos"
                         type="cpf"
@@ -97,25 +108,29 @@ function SignUp() {
                         value={values.cpf}
                         placeholder="CPF..."
                       />
+
+                    </div>
+
+
+                    <div className="btn-btn">
+                      <button
+                        onClick={handleSubmit}
+                        className="ui button"
+                        type="submit"
+                        disabled={isSubmitting}
+                      >
+                        Cadastrar
+                      </button>
                     </div>
                   </form>
-                  <div className="btn-btn">
-                    <button
-                      onClick={handleSubmit}
-                      className="ui button"
-                      type="submit"
-                      disabled={isSubmitting}
-                    >
-                      Cadastrar
-                    </button>
-                  </div>
-                </div>
+                </>
               )}
             </Formik>
           </div>
+
         </div>
-      </section>
-    </>
+      </div>
+    </div>
   );
 }
 export default SignUp;

@@ -28,13 +28,17 @@ body {
   text-align: center;
 }
 
-.form {
-  width: 50%;
+form {
+  width: 400px;
+  margin: 10px;
+ 
 }
 
 .container-resultados {
   padding: 20px;
 }
+
+ 
 
 .inputcursos {
   margin: 10px !important;
@@ -53,8 +57,16 @@ body {
 }
 
 .button-link {
+  margin: 10px;
+  padding: 5px;
+}
+
+.button-link a{
+  font: 400;
+  color: black;
+  font-size: 20px;
   border: 1px solid;
-  width: 100px;
   padding: 5px;
   border-radius: 5px;
+  transition: 0.5s;
 }

@@ -6,7 +6,7 @@ export default function Routes() {
   return (
     <BrowserRouter>
       <Route component={Consultas} path="/" exact />
-      <Route component={SignUp} path="/cadastro" />
+      <Route component={SignUp} path="/cadastro/alunos" />
     </BrowserRouter>
   );
 }

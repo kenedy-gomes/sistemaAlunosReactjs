@@ -72,18 +72,14 @@ function SignIn() {
           <h1>Consultas e Cadastro de Alunos - Cursos</h1>
         </div>
       </nav>
+      
       <div className="container">
         <div className="form">
           <div className="container-result">
             <div className="h1-container">
               <h1>Consulta Alunos</h1>
-            </div>
-            <div className="button-link">
-              <a className="link" href="./cadastro">
-                Cadastro
-              </a>
-            </div>
-
+              
+             </div>
             <section method="get" className="container-form">
               <div className="cont">
                 Alunos:
@@ -99,6 +95,7 @@ function SignIn() {
                 <button onClick={() => getAlunos()} class="ui button">
                   Consultar
                 </button>
+                <a href="http://localhost:3000/cadastro/alunos" className="ui button">Cadastrar</a>
               </div>
               <div>
                 Cursos:
@@ -114,9 +111,11 @@ function SignIn() {
                 <button className="ui button" onClick={() => getCursos()}>
                   Consultar
                 </button>
+                <a href="http://localhost:3000/cadastro/curso" className="ui button">Cadastrar</a>
               </div>
             </section>
-
+            
+      
             <section method="get" className="container-text">
               <div className="container-resultados">
                 <div>
