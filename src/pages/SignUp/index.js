@@ -17,12 +17,13 @@ function SignUp() {
 
       .then(function (response) {
         console.log(response);
+        alert("Cadastro efetuado!")
+        window.location.href = "http://localhost:3000";
       })
       .catch(function (error) {
         console.log(error);
       });
-    alert("Cadastro efetuado!")
-    window.location.href = "http://localhost:3000";
+ 
   };
   return (
     <div>
